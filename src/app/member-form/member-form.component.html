@@ -1,0 +1,27 @@
+<!--div>
+  <button mat-button color = "primary">List</button>
+  <button mat-button color = "primary">Form</button>
+</div-->
+<form [formGroup]="form"(ngSubmit)="ONSUB()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="CIN" formControlName="cin">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="type" formControlName="type">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="CV" formControlName="cv">
+    </mat-form-field>
+  </p>
+  <button mat-button type = "submit">submit</button>
+</form>

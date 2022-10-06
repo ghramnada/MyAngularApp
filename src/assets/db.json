@@ -1,0 +1,8 @@
+{
+  "members":[
+    {"id":"123456" , "cin": "111112" , "name" :"nnn" , "createdDate" : "13/5/2004" ,"CV" : "kjbcqlsc" , "type" : "enseignat"},
+    {"id":"123457" , "cin" : "111113" , "name" :"jjj" , "createdDate" : "13/5/2004" ,"CV" : "kjbcqlsc" , "type" : "enseignat"},
+    {"id":"123458" , "cin" : "111114" , "name" :"hhh" , "createdDate" : "13/5/2004" ,"CV" : "kjbcqlsc" , "type" : "enseignat"}
+
+  ]
+}

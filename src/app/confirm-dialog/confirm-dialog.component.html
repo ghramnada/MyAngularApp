@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  {{message}}
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>{{cancel}}</button>
+  <!--thread observable entend action d utilisateur ds btedialog-->
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{confirm}}</button>
+</div>
+
