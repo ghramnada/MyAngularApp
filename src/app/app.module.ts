@@ -24,6 +24,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { EventsComponent } from './events/events.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormDialogComponent } from './form-dialog/form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ToolsComponent,
     ArticlesComponent,
     EventsComponent,
-    DashboardComponent
+    DashboardComponent,
+    FormDialogComponent
   ],
   imports: [
     BrowserModule,FormsModule, ReactiveFormsModule,

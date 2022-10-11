@@ -15,7 +15,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 export class MembersComponent implements OnInit {
   //dataSource:Member[]
   dataSource : MatTableDataSource<Member>;
-  displayedColumns: string[] = ['id', 'cin', 'name', 'createdDate','CV','type', 'icon'];
+  displayedColumns: string[] = ['cin', 'name', 'createdDate','CV','type', 'icon'];
   //il faut instancier les services dans constructor
   constructor(private MemberService: MemberService ,private router: Router,private dialog: MatDialog) { 
     //this.dataSource = this.MemberService.tab

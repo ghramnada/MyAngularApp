@@ -10,7 +10,7 @@ export class MemberService {
 
   constructor(private  httpClient:HttpClient) { }
   public tab:Member[] = GLOBAL._DB.members;
-  saveMember(MemberToSave : Member) : Promise<Member>
+  saveMember(MemberToSave : Member) : Promise<void>
   {
     // si j'ai partie back 
     //return this.httpClient.post<Member>('linktoRestAPI',MemberToSave).toPromise();
@@ -20,7 +20,8 @@ export class MemberService {
     
     const objetToInsert = {...MemberToSave,id:MemberToSave.id ??Math.ceil(Math.random() *1000).toString(),createdDate:MemberToSave.createdDate ??new Date().toISOString()};
     this.tab=[objetToInsert,...this.tab.filter(item=>item.id != objetToInsert.id)];
-    return (new Promise (resolve=>resolve(MemberToSave)));
+    //what is resolve used for 
+    return (new Promise (resolve=>resolve()));
 }
   getMemberById(currentID:String):Promise<Member>
   {
@@ -29,6 +30,7 @@ export class MemberService {
     return new Promise(resolve=> resolve(
 
     this.tab.filter(item=> item.id===currentID)[0] ?? null));
+    //the resolve methods will call then and pass it s param as inputs to then 
   }
 
   DeleteById(id:String):Promise<void>{

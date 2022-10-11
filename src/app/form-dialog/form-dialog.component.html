@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>type</mat-label>
+    <input matInput [(ngModel)]="data.type">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>titre</mat-label>
+    <input matInput [(ngModel)]="data.titre">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>lien</mat-label>
+    <input matInput [(ngModel)]="data.lien">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>sourcepdf</mat-label>
+    <input matInput [(ngModel)]="data.sourcePdf">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="saveClick()" [mat-dialog-close]="" cdkFocusInitial>save</button>
+</div>
+
+

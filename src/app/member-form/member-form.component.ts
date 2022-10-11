@@ -15,7 +15,31 @@ export class MemberFormComponent implements OnInit {
   Item: any ;
   constructor(private memberService:MemberService, private router: Router,private activatedRoute:ActivatedRoute) {}
   
-
+  ONSUB():void{
+    console.log(this.form.value);
+    //const ObjectTosubmit = this.form.value;
+    const ObjectTosubmit = {...this.Item, ...this.form.value}
+    this.memberService.saveMember(ObjectTosubmit).then(()=>{this.router.navigate(['./members'])}) //reception du contenu du thread 
+                                                 //action post reception du retour du thread 
+  }
+  ngOnInit(): void {
+    //1- recuperer l id de l elet a partir de son id ds url
+    this.currentID = this.activatedRoute.snapshot.params.id;
+    //2- si li d a une valeur recup l elet a partir de son id  getMemberbyId()
+    if(!!this.currentID)
+    {
+      this.memberService.getMemberById(this.currentID).then(
+        (MembertoFind)=>{
+          this.Item = MembertoFind;
+          this.initForm1(MembertoFind);
+        }
+        
+      );
+    }
+    else this.initForm();
+    //3-si on n'a pas id => apppeler initForm()
+      //initialisation de l objet 
+  }
   initForm():void
 { 
   
@@ -37,32 +61,6 @@ initForm1(item:Member):void
     CV : new FormControl(item.CV, [Validators.required]),
   });
   
-}
-ONSUB():void{
-  console.log(this.form.value);
-  //const ObjectTosubmit = this.form.value;
-  const ObjectTosubmit = {...this.Item, ...this.form.value}
-  this.memberService.saveMember(ObjectTosubmit).then(()=>{this.router.navigate(['./members'])}) //reception du contenu du thread 
-                                               //action post reception du retour du thread 
-}
-ngOnInit(): void {
-  this.initForm();
-  //1- recuperer l id de l elet a partir de son id 
-  this.currentID = this.activatedRoute.snapshot.params.id;
-  //2- si li d a une valeur recup l elet a partir de son id  getMemberbyId()
-  if(!!this.currentID)
-  {
-    this.memberService.getMemberById(this.currentID).then(
-      (MembertoFind)=>{
-        this.Item = MembertoFind;
-        this.initForm1(MembertoFind);
-      }
-      
-    );
-  }
-  else this.initForm();
-  //3-si on n'a pas id => apppeler initForm()
-    //initialisation de l objet 
 }
 }
 

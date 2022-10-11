@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Article } from 'src/models/Article';
+import { ArticleService } from 'src/services/article.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { FormDialogComponent } from '../form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-articles',
@@ -7,9 +13,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor() { }
+  dataSource : Article[];
+  displayedColumns: string[] = ['id', 'type', 'titre','lien','sourcePdf', 'date','auteur','actions'];
+  constructor(private ArticleService : ArticleService, private dialog: MatDialog) { 
+    this.dataSource= this.ArticleService.tab;
+
+  }
 
   ngOnInit(): void {
   }
 
+  fetchDataSource(): void{
+    this.ArticleService.getAllArticles().then((tab) => {this.dataSource = tab});
+  }
+
+  OnRemove(id : String):void{
+    //1-ouvrir la boite de dialogue 
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      height: '200px',
+      width: '300px',
+    });
+    //2-attendre le retour de l utilisateur 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+         //3-if retour = confirm  efface
+        this.ArticleService.DeleteById(id).then(()=>{this.fetchDataSource()});
+    }
+    });
+    
+  }
+
+  edit(articleId : String):void{
+    let dialogRef = this.dialog.open(FormDialogComponent, {
+      height: '400px',
+      width: '250px',
+      data: {id:articleId},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchDataSource();
+    });
+};
 }
