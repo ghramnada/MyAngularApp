@@ -23,15 +23,13 @@ export class FormDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<FormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private articleService : ArticleService)
   {
-    if(data.id)
+    /*if(data.id)
     {
-      console.log(data.id);
-      this.articleService.getArticleById(data.id).then((item)=>{data.lien = item.lien; data.sourcePdf = item.sourcePdf ; data.titre = item.titre ; data.type = item.type,data.date = item.date})
-    }
+      this.articleService.getArticleById(data.id).then((item)=>{data.id = item.id; data.lien = item.lien; data.sourcePdf = item.sourcePdf ; data.titre = item.titre ; data.type = item.type,data.date = item.date; data.date = item.date})
+    }*/
   }
   saveClick(): void{
     const ObjectTosubmit = {...this.Item, ...this.data};
-    console.log(ObjectTosubmit.id)
     this.articleService.saveArticle(ObjectTosubmit).then(()=>{});
   }
   onNoClick(): void {

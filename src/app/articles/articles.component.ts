@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules, isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +13,7 @@ import { FormDialogComponent } from '../form-dialog/form-dialog.component';
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
-
+  articleBuffer : any;
   dataSource : Article[];
   displayedColumns: string[] = ['id', 'type', 'titre','lien','sourcePdf', 'date','auteur','actions'];
   constructor(private ArticleService : ArticleService, private dialog: MatDialog) { 
@@ -44,13 +45,25 @@ export class ArticlesComponent implements OnInit {
   }
 
   edit(articleId : String):void{
+    let dialogRef;
+    this.ArticleService.getArticleById(articleId).then((articleTofind)=>{this.articleBuffer = articleTofind;
+      console.log(articleTofind);
+    dialogRef = this.dialog.open(FormDialogComponent, {
+      height: '400px',
+      width: '250px',
+      data: {id:articleId, lien:this.articleBuffer.lien, sourcePdf:this.articleBuffer.sourcePdf, titre:this.articleBuffer.titre, type:this.articleBuffer.type, date:this.articleBuffer.date}});
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchDataSource();
+    })  })
+  };
+
+  add():void{
     let dialogRef = this.dialog.open(FormDialogComponent, {
       height: '400px',
       width: '250px',
-      data: {id:articleId},
-    });
+      data: {lien:"", sourcePdf:"", titre:"", type:""}});
     dialogRef.afterClosed().subscribe(result => {
       this.fetchDataSource();
-    });
+    })
+  }
 };
-}

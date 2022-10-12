@@ -19,9 +19,7 @@ export class ArticleService {
 
   getArticleById(currentID:String):Promise<Article>
   {
-   return new Promise(resolve=> resolve(
-    this.tab.filter(item=> item.id===currentID)[0] ?? null));
-
+   return new Promise(resolve=> resolve(this.tab.filter(item=> item.id===currentID)[0] ?? null));
   }
 
   DeleteById(id:String):Promise<void>{
